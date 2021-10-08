@@ -11,7 +11,6 @@ Start
             turnOrder [] - add 1 or 10 when player clicks button
             winConditions - if (winArrays) total divisible by 3 or 30, x or o wins respectively - should be 8 combinations per player
             
-            
         create View - 
         Init()
             generateHTML()
@@ -30,15 +29,15 @@ Start
 
         playerOneTurn = true
         playerOne clicks space in grid
-            IF gridSpace contains symbol
+            IF button contains symbol
                 display "only one symbol per square!"
-            ELSE showSymbol() inside grid space
+            ELSE showSymbol() inside button
                 playerOneTurn = false
                 add number 1 to winTest
         playerTwo clicks space in grid
-            IF gridSpace contains symbol
+            IF button contains symbol
                 display "only one symbol per square!"
-            ELSE showSymbol inside grid space
+            ELSE showSymbol inside button
                 add number 10 to winTest
             playerOneTurn = true
         IF turnOrder.length > 5

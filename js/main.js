@@ -12,7 +12,7 @@ class Model {
     this.playerTwo = 'O';
     this.playerSymbol = '';
     this.turns = 0;
-    this.gamePlaces = []
+    this.turnOrder = []
   }
 
   setController(controller) {
@@ -21,12 +21,10 @@ class Model {
   
   init() {
     this.playerOneTurn = true;
-    this.playerSymbol = 'X';
+    this.playerSymbol = this.playerOne;
     this.turns = 0;
-    this.gamePlaces = ['', '', '', '', '', '', '', '', '',]
+    this.turnOrder = ['', '', '', '', '', '', '', '', '',]
   }
-  
-  
 }
 
 class View {
@@ -111,7 +109,6 @@ class View {
         parent: col,
         handler: this.controller.gameTurn.bind(this.controller)
       });
-      
     }
     let resetButton = this.generateHTML({
       type: "button",
@@ -144,31 +141,85 @@ class Controller {
     if (this.model.playerOneTurn == true) {
       this.model.playerOneTurn = false;
       this.model.playerSymbol = this.model.playerOne
+      this.model.turnOrder[e.target.id] = 1
+      console.log(this.model.turnOrder)
     } else {
       this.model.playerOneTurn = true;
       this.model.playerSymbol = this.model.playerTwo
+      this.model.turnOrder[e.target.id] = 10
+      console.log(this.model.turnOrder)
     }
 
     this.model.turns++;
     e.target.textContent = this.model.playerSymbol 
     //
-    // this.view.topRow.text = this.model.playerSymbol
+    // this.view.topRow.textContent = this.model.playerSymbol
     //
     // e.target.view.removeEventListener('click', this.gameTurn, false)
-    console.log("it works?!?");
+    // console.log("it works?!?");
     console.log(this.model.turns);
     if (this.model.turns > 5) {
-    //   this.checkWin()
+      this.checkWin()
     }
     if (this.model.turns % 9 === 0 && this.model.turns > 0) {
-        alert('Draw!')
+        alert('Draw!');
+        this.reset();
         }
   }
 
 //   checkWin() {
-//     if (this.view.shapeButton.id == this.model.winArrays) {
-      
-//     }
+//     if (this.model.turnOrder[0,1,2] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[3,4,5] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[6,7,8] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[0,3,6] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[1,4,7] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[2,5,8] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[0,4,8] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[2,4,6] % 3 === 0) {
+//       console.log('x wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[0,1,2] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[3,4,5] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[6,7,8] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[0,3,6] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[1,4,7] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[2,5,8] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[0,4,8] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turnOrder[2,4,6] % 30 === 0) {
+//       console.log('o wins');
+//       this.reset();
+//     } else if (this.model.turns % 9 === 0 && this.model.turns > 0) {
+//         alert('Draw!');
+//         this.reset();
+//         }
 //   }
   
   reset() {
@@ -193,7 +244,6 @@ class App {
     this.controller.init();
   }
 }
-
 // // across top
 // ['X','X','X','','','','','','']
 // // across middle
