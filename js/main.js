@@ -8,10 +8,11 @@ class Model {
   constructor(controller) {
     this.controller = controller;
     this.playerOneTurn = true;
-    this.playerOne = '';
-    this.playerTwo = '';
+    this.playerOne = 'X';
+    this.playerTwo = 'O';
     this.playerSymbol = '';
     this.turns = 0;
+    this.gamePlaces = []
   }
 
   setController(controller) {
@@ -20,10 +21,9 @@ class Model {
   
   init() {
     this.playerOneTurn = true;
-    this.playerOne = 'X';
-    this.playerTwo = 'O';
     this.playerSymbol = 'X';
     this.turns = 0;
+    this.gamePlaces = ['', '', '', '', '', '', '', '', '',]
   }
   
   
