@@ -3,25 +3,30 @@ Objective - game where two players play tic-tac-toe. Objective of the game is to
 Start
     INIT()
         create Model - 
-            winConditions - if (winArrays) total divisible by 3 or 30, x or o wins respectively - should be 16 combinations between players
-            score
+        Init()
             playerOneTurn - boolean
+            playerOne = 'X'
+            playerTwo = 'O'
+            playerSymbol - on playerOneTurn true = X, false = O
+            turnOrder [] - add 1 or 10 when player clicks button
+            winConditions - if (winArrays) total divisible by 3 or 30, x or o wins respectively - should be 8 combinations per player
+            
             
         create View - 
-            
-            create gameInstance
-            generateHTML
-            createGame
-            showCurrentPlayer
-            updateView()
+        Init()
+            generateHTML()
+            createGame() - use generateHTML to populate page
+            renderTurn() - put playerSymbol inside button
+            clicked - boolean - default true - if false, remove event listener
 
         create Controller - 
             init()
-            restart()
-            checkWin() - if (winTest == winConditions) - 
-            updateClickArray()
-            updateCoordGrid()
-            changePlayer()
+                restart() - run all init functions to empty page
+                updateTurnOrder()
+                renderTurn() - changes
+                gameTurn() - playerOneTurn true/false, checkWin() if over 5 turns, 
+                checkWin()
+                
 
         playerOneTurn = true
         playerOne clicks space in grid
@@ -29,20 +34,21 @@ Start
                 display "only one symbol per square!"
             ELSE showSymbol() inside grid space
                 playerOneTurn = false
-                add number 3 to winTest
+                add number 1 to winTest
         playerTwo clicks space in grid
             IF gridSpace contains symbol
                 display "only one symbol per square!"
             ELSE showSymbol inside grid space
                 add number 10 to winTest
             playerOneTurn = true
-        continue until turnOrder.length > 5 (minimum for possible win)
         IF turnOrder.length > 5
             checkWin() every following turn
             if winConditions == true
                 display win message, restartButton, increment score
             ELSE IF turnOrder.length < 9, continue
             ELSE IF turnOrder.length == 9, display "draw"
+        IF resetButton clicked
+            clearBoard()
 
 Classes
     Model
@@ -60,7 +66,6 @@ Classes
     View
         Functions
                 generateHTML()
-                createGrid()
                 createBoard()
                 showCurrentPlayer()
                 showScore()
@@ -82,27 +87,6 @@ Classes
 
         Arrays
             winConditions - lists possible combinations to win
-
-
-INIT
-    create gameInstance
-    create players
-    
-Player clicks startButton
-Display input for names
-Store names to playerArray  
-Display gameBoard
-playerOne clicks gameSquare[]
-    player1Turn = false
-    changes view of gameBoard to include playerShape
-playerTwo clicks gameSquare[]
-    player1Turn = true
-IF three of same player’s shapes are in a row on board - according to winConditions
-    gameOver()
-    Display winner, score, startButton
-    
-    
-END
 
 
 <!-- in-class pseudocode -->
